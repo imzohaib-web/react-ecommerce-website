@@ -1,5 +1,5 @@
 import { Bell, CheckCircle2, Package, Sparkles } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import './NotificationsPage.css';
 
 export function NotificationsPage() {

@@ -1,5 +1,5 @@
 import { Sparkles, ShieldCheck, Truck, RotateCcw, ArrowUp, Globe, Share2, Heart } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 export function Footer() {

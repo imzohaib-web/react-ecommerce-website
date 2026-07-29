@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { AlertTriangle, ArrowLeft } from 'lucide-react';
 import './NotFoundPage.css';
 

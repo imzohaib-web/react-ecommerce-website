@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
 import { CartProvider } from './context/CartContext';
 import { OrdersProvider } from './context/OrdersContext';
@@ -9,7 +9,7 @@ import { Footer } from './components/layout/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { PageSkeleton } from './components/common/SkeletonLoader';
 
-// Lazy loading route components for optimal performance
+// Lazy loading route components
 const HomePage = lazy(() => import('./pages/HomePage').then((m) => ({ default: m.HomePage })));
 const CheckoutPage = lazy(() => import('./pages/checkout/CheckoutPage').then((m) => ({ default: m.CheckoutPage })));
 const OrderPage = lazy(() => import('./pages/orders/OrderPage').then((m) => ({ default: m.OrderPage })));

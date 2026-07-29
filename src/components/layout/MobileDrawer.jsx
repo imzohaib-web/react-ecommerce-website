@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react';
-import { X, Search, Package, ShoppingCart, Heart, Home, Tag, Sparkles } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { X, Package, ShoppingCart, Heart, Home, Tag, Sparkles } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import './MobileDrawer.css';

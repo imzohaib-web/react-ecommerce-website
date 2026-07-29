@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Package, RotateCcw, Truck, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useOrders } from '../../context/OrdersContext';
 import { useCart } from '../../context/CartContext';

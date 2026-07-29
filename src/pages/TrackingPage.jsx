@@ -1,8 +1,8 @@
-import { useSearchParams, Link } from 'react-router';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useOrders } from '../context/OrdersContext';
 import { productsData } from '../data/productsData';
 import { formatDate } from '../utils/dateUtils';
-import { ArrowLeft, PackageCheck, Truck, CheckCircle2, Clock, MapPin } from 'lucide-react';
+import { ArrowLeft, PackageCheck, Truck, Clock, MapPin } from 'lucide-react';
 import './TrackingPage.css';
 
 export function TrackingPage() {
@@ -122,7 +122,7 @@ export function TrackingPage() {
           <div className="tracking-live-note">
             <MapPin size={16} className="map-pin-icon" />
             <span>
-              {status === 'Preparing' && 'Package is being processed and packaged at Amazon fulfillment center.'}
+              {status === 'Preparing' && 'Package is being processed and packaged at fulfillment center.'}
               {status === 'Shipped' && 'Package is in transit with carrier. On schedule for delivery.'}
               {status === 'Delivered' && 'Package was left near front door or porch.'}
             </span>
