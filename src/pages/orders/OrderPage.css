@@ -1,0 +1,262 @@
+.orders-page-container {
+  min-height: calc(100vh - 120px);
+  background-color: #f3f4f6;
+  padding: 32px 20px 60px 20px;
+}
+
+.orders-page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.orders-page-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 28px 0;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.order-card-header {
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.order-header-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.order-meta-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.highlight-link {
+  color: #007185;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.meta-link {
+  font-size: 0.82rem;
+  color: #007185;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.meta-link:hover {
+  text-decoration: underline;
+}
+
+.order-card-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-product-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+}
+
+.order-product-row:not(:last-child) {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.product-delivery-badge {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #065f46;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.truck-icon {
+  color: #10b981;
+}
+
+.order-product-details-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr 200px;
+  gap: 20px;
+  align-items: start;
+}
+
+.order-product-image-wrapper {
+  width: 100px;
+  height: 100px;
+  background: #f9fafb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-product-image {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.order-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-product-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+}
+
+.order-product-qty {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.order-product-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.buy-again-btn {
+  align-self: flex-start;
+  background: #ffd814;
+  border: 1px solid #fcd200;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f1111;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.15s ease;
+}
+
+.buy-again-btn:hover {
+  background: #f7ca00;
+}
+
+.order-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.track-package-btn {
+  display: block;
+  text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+}
+
+.track-package-btn:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.empty-orders-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 60px 20px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.empty-orders-icon {
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.explore-catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #131921;
+  color: #febd69;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 20px;
+  margin-top: 16px;
+  transition: background-color 0.15s ease;
+}
+
+.explore-catalog-btn:hover {
+  background-color: #232f3e;
+}
+
+@media (max-width: 768px) {
+  .order-product-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,77 @@
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.skeleton-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: #e2e8f0;
+}
+
+.skeleton-line {
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.title-line {
+  width: 90%;
+  height: 18px;
+}
+
+.short-line {
+  width: 50%;
+}
+
+.price-line {
+  width: 35%;
+  height: 20px;
+}
+
+.skeleton-button {
+  height: 38px;
+  border-radius: 20px;
+  background: #cbd5e1;
+  margin-top: auto;
+}
+
+.header-skeleton {
+  height: 40px;
+  width: 300px;
+  margin-bottom: 24px;
+}
+
+.page-skeleton-container {
+  padding: 40px 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
