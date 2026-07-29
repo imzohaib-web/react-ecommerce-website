@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShoppingCart, Eye, Star, Check } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Check, Heart } from 'lucide-react';
 import { formatMoney } from '../../utils/money';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
@@ -7,9 +7,11 @@ import './ProductCard.css';
 
 export function ProductCard({ product }) {
   const { addToCart } = useCart();
-  const { setQuickViewProduct } = useProducts();
+  const { setQuickViewProduct, wishlist, toggleWishlist } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
+
+  const isWishlisted = wishlist.includes(product.id);
 
   const handleAddToCart = () => {
     addToCart(product.id, quantity);
@@ -19,94 +21,105 @@ export function ProductCard({ product }) {
     }, 2000);
   };
 
-  const ratingStars = Math.round(product.rating.stars * 10);
-  const ratingImagePath = `images/ratings/rating-${ratingStars}.png`;
+  // Mock slashed original price for 2026 look (25% higher)
+  const originalPriceCents = Math.round(product.priceCents * 1.25);
 
   return (
-    <div className="product-card">
-      {/* Category badge */}
-      {product.category && (
-        <span className="product-badge-category">{product.category}</span>
-      )}
+    <div className="flagship-product-card">
+      {/* Top Badges & Wishlist Action */}
+      <div className="card-top-bar">
+        {product.category && (
+          <span className="category-tag-pill">{product.category}</span>
+        )}
+        <button
+          type="button"
+          className={`wishlist-heart-btn ${isWishlisted ? 'active' : ''}`}
+          onClick={() => toggleWishlist(product.id)}
+          aria-label="Add to Wishlist"
+        >
+          <Heart size={16} fill={isWishlisted ? '#f43f5e' : 'none'} color={isWishlisted ? '#f43f5e' : '#64748b'} />
+        </button>
+      </div>
 
-      {/* Image container with quick view overlay */}
-      <div className="product-card-image-wrapper">
+      {/* Image Container */}
+      <div className="product-image-container" onClick={() => setQuickViewProduct(product)}>
         <img
           src={product.image}
           alt={product.name}
-          className="product-card-image"
+          className="product-main-image"
           loading="lazy"
         />
         <button
           type="button"
-          className="quick-view-trigger-btn"
-          onClick={() => setQuickViewProduct(product)}
-          aria-label="Quick view product"
+          className="card-quick-view-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            setQuickViewProduct(product);
+          }}
         >
-          <Eye size={16} /> Quick View
+          <Eye size={15} /> Quick View
         </button>
       </div>
 
-      {/* Product Title */}
-      <h3
-        className="product-card-title line-clamp-2"
-        onClick={() => setQuickViewProduct(product)}
-        title={product.name}
-      >
-        {product.name}
-      </h3>
+      {/* Rating Pill & Title */}
+      <div className="product-card-body">
+        <div className="rating-pill-row">
+          <div className="star-rating-badge">
+            <Star size={13} fill="#f59e0b" color="#f59e0b" />
+            <span className="rating-score">{product.rating.stars}</span>
+            <span className="rating-reviews">({product.rating.count})</span>
+          </div>
+        </div>
 
-      {/* Rating */}
-      <div className="product-card-rating">
-        <img
-          src={ratingImagePath}
-          alt={`${product.rating.stars} stars`}
-          className="rating-stars-img"
-        />
-        <span className="rating-count-text">({product.rating.count})</span>
-      </div>
-
-      {/* Price */}
-      <div className="product-card-price">
-        <span className="price-currency">$</span>
-        <span className="price-amount">{formatMoney(product.priceCents)}</span>
-      </div>
-
-      {/* Quantity selector */}
-      <div className="product-card-quantity-row">
-        <label htmlFor={`qty-${product.id}`} className="qty-label">
-          Qty:
-        </label>
-        <select
-          id={`qty-${product.id}`}
-          value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-          className="qty-select"
+        <h3
+          className="product-card-title"
+          onClick={() => setQuickViewProduct(product)}
+          title={product.name}
         >
-          {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-      </div>
+          {product.name}
+        </h3>
 
-      {/* Add to Cart button */}
-      <button
-        type="button"
-        className={`add-to-cart-btn ${isAdded ? 'added' : ''}`}
-        onClick={handleAddToCart}
-      >
-        {isAdded ? (
-          <>
-            <Check size={18} /> Added to Cart
-          </>
-        ) : (
-          <>
-            <ShoppingCart size={18} /> Add to Cart
-          </>
-        )}
-      </button>
+        {/* Pricing Row */}
+        <div className="product-price-row">
+          <div className="price-box">
+            <span className="current-price">${formatMoney(product.priceCents)}</span>
+            <span className="slashed-price">${formatMoney(originalPriceCents)}</span>
+          </div>
+          <span className="discount-badge">-20%</span>
+        </div>
+
+        {/* Quantity and Add to Cart Action */}
+        <div className="card-footer-actions">
+          <select
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="card-qty-dropdown"
+            aria-label="Select quantity"
+          >
+            {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+
+          <button
+            type="button"
+            className={`flagship-add-btn ${isAdded ? 'added' : ''}`}
+            onClick={handleAddToCart}
+          >
+            {isAdded ? (
+              <>
+                <Check size={16} /> Added
+              </>
+            ) : (
+              <>
+                <ShoppingBag size={16} /> Add to Cart
+              </>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Lock, Trash2, ShieldCheck, ShoppingBag, ArrowLeft, CheckCircle } from 'lucide-react';
+import { Lock, Trash2, ShieldCheck, ShoppingBag, ArrowLeft, Sparkles } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useOrders } from '../../context/OrdersContext';
 import { formatMoney } from '../../utils/money';
@@ -29,16 +29,19 @@ export function CheckoutPage() {
 
   return (
     <div className="checkout-container">
-      {/* Dedicated Checkout Header */}
+      {/* Dedicated Flagship Checkout Header */}
       <header className="checkout-header">
         <div className="checkout-header-content">
           <Link to="/" className="checkout-logo">
-            <span className="logo-main">amazon</span>
-            <span className="logo-sub">.pro</span>
+            <div className="logo-icon-box">
+              <Sparkles size={16} />
+            </div>
+            <span className="logo-main">AURA</span>
+            <span className="logo-sub">2026</span>
           </Link>
 
           <div className="checkout-title-central">
-            Checkout (
+            Review Order (
             <Link to="/" className="return-home-link">
               {summary.totalQuantity} {summary.totalQuantity === 1 ? 'item' : 'items'}
             </Link>
@@ -46,28 +49,28 @@ export function CheckoutPage() {
           </div>
 
           <div className="checkout-secure-badge">
-            <Lock size={18} className="lock-icon" />
-            <span className="secure-text hide-mobile">Secure Checkout</span>
+            <Lock size={16} className="lock-icon" />
+            <span className="secure-text hide-mobile">256-Bit SSL Encrypted</span>
           </div>
         </div>
       </header>
 
-      {/* Main Page Area */}
+      {/* Main Page Body */}
       <main className="checkout-page-body">
-        <h1 className="checkout-page-title">Review your order</h1>
+        <h1 className="checkout-page-title">Order Checkout</h1>
 
         {cart.length === 0 ? (
           <div className="empty-cart-card">
             <ShoppingBag size={56} className="empty-cart-icon" />
-            <h2>Your Shopping Cart is empty</h2>
-            <p>Your shopping cart has no items. Explore our product catalog to discover amazing deals.</p>
+            <h2>Your Shopping Cart is Empty</h2>
+            <p>Your shopping cart has no items. Explore our product catalog to discover deals.</p>
             <Link to="/" className="back-to-shop-btn">
               <ArrowLeft size={16} /> Continue Shopping
             </Link>
           </div>
         ) : (
           <div className="checkout-grid">
-            {/* Left Column: Order Items Summary */}
+            {/* Left Column: Order Items */}
             <div className="checkout-items-list">
               {cart.map((cartItem) => {
                 const { product, deliveryOption } = cartItem;
@@ -76,7 +79,7 @@ export function CheckoutPage() {
                 return (
                   <div key={cartItem.productId} className="cart-item-card">
                     <div className="delivery-date-banner">
-                      Delivery date: <span className="highlight-date">{estimatedDateStr}</span>
+                      Estimated Arrival: <span className="highlight-date">{estimatedDateStr}</span>
                     </div>
 
                     <div className="cart-item-details-grid">
@@ -119,7 +122,7 @@ export function CheckoutPage() {
                             onClick={() => removeFromCart(cartItem.productId)}
                             title="Remove item"
                           >
-                            <Trash2 size={15} /> Delete
+                            <Trash2 size={14} /> Remove
                           </button>
                         </div>
                       </div>
@@ -127,7 +130,7 @@ export function CheckoutPage() {
                       {/* Delivery Option Radio Buttons */}
                       <div className="delivery-options-container">
                         <div className="delivery-options-title">
-                          Choose a delivery option:
+                          Select Delivery Method:
                         </div>
 
                         {deliveryOptions.map((option) => {
@@ -152,8 +155,8 @@ export function CheckoutPage() {
                                 <div className="delivery-option-date">{optionDateStr}</div>
                                 <div className="delivery-option-price">
                                   {option.priceCents === 0
-                                    ? 'FREE Shipping'
-                                    : `$${formatMoney(option.priceCents)} Shipping`}
+                                    ? 'FREE Express Shipping'
+                                    : `$${formatMoney(option.priceCents)} Standard Shipping`}
                                 </div>
                               </div>
                             </label>
@@ -166,7 +169,7 @@ export function CheckoutPage() {
               })}
             </div>
 
-            {/* Right Column: Payment Summary Card */}
+            {/* Right Column: Order Summary Card */}
             <div className="payment-summary-column">
               <div className="payment-summary-card">
                 <h2 className="payment-summary-title">Payment Summary</h2>
@@ -194,7 +197,7 @@ export function CheckoutPage() {
                 <div className="payment-summary-divider"></div>
 
                 <div className="payment-summary-row total-row">
-                  <span>Order total:</span>
+                  <span>Order Total:</span>
                   <span className="money-amount grand-total">${formatMoney(summary.totalCostCents)}</span>
                 </div>
 
@@ -204,11 +207,11 @@ export function CheckoutPage() {
                   onClick={handlePlaceOrder}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Processing Order...' : 'Place your order'}
+                  {isSubmitting ? 'Processing Order...' : 'Complete Order'}
                 </button>
 
                 <div className="checkout-guarantee-note">
-                  <ShieldCheck size={16} /> 256-Bit Encryption & Order Protection
+                  <ShieldCheck size={16} /> Guaranteed Safe & Secure Checkout
                 </div>
               </div>
             </div>

@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Search, ShoppingCart, Package, MapPin, X, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { Search, ShoppingBag, Package, Heart, Menu, X, Sparkles, SlidersHorizontal } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
+import { MobileDrawer } from './MobileDrawer';
 import './Navbar.css';
 
 export function Navbar() {
   const navigate = useNavigate();
   const { summary } = useCart();
-  const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory, categories } = useProducts();
+  const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory, categories, wishlist } = useProducts();
   const [localSearch, setLocalSearch] = useState(searchTerm);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -23,100 +25,106 @@ export function Navbar() {
   };
 
   return (
-    <header className="navbar">
-      <div className="navbar-container">
-        {/* Brand Logo */}
-        <Link to="/" className="navbar-brand">
-          <div className="brand-logo-text">
-            <span className="brand-name">amazon</span>
-            <span className="brand-dot">.pro</span>
-          </div>
-          <div className="brand-subtitle">
-            <Sparkles size={11} className="sparkle-icon" /> Premium Shop
-          </div>
-        </Link>
-
-        {/* Location deliver to indicator */}
-        <div className="navbar-location hide-mobile">
-          <MapPin size={18} className="location-icon" />
-          <div className="location-text">
-            <span className="location-label">Deliver to</span>
-            <span className="location-value">United States</span>
-          </div>
-        </div>
-
-        {/* Search Bar Form */}
-        <form className="navbar-search" onSubmit={handleSearchSubmit}>
-          <div className="search-category-select">
-            <select
-              value={selectedCategory}
-              onChange={(e) => {
-                setSelectedCategory(e.target.value);
-                navigate('/');
-              }}
-              aria-label="Select category"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-            <SlidersHorizontal size={14} className="select-icon" />
-          </div>
-
-          <div className="search-input-wrapper">
-            <input
-              type="text"
-              placeholder="Search Amazon products, categories, keywords..."
-              value={localSearch}
-              onChange={(e) => {
-                setLocalSearch(e.target.value);
-                setSearchTerm(e.target.value);
-              }}
-              className="search-input"
-            />
-            {localSearch && (
-              <button
-                type="button"
-                className="search-clear-btn"
-                onClick={handleClearSearch}
-                aria-label="Clear search"
-              >
-                <X size={16} />
-              </button>
-            )}
-          </div>
-
-          <button type="submit" className="search-submit-btn" aria-label="Submit Search">
-            <Search size={18} />
+    <>
+      <header className="flagship-navbar">
+        <div className="navbar-inner">
+          {/* Mobile Hamburger Trigger */}
+          <button
+            type="button"
+            className="mobile-menu-btn"
+            onClick={() => setIsMobileOpen(true)}
+            aria-label="Open mobile menu"
+          >
+            <Menu size={22} />
           </button>
-        </form>
 
-        {/* Right Section Nav Actions */}
-        <div className="navbar-actions">
-          {/* Orders Link */}
-          <Link to="/orders" className="nav-action-link">
-            <Package size={20} className="nav-icon" />
-            <div className="nav-text">
-              <span className="nav-text-top">Returns</span>
-              <span className="nav-text-bottom">& Orders</span>
+          {/* Brand Logo */}
+          <Link to="/" className="flagship-brand">
+            <div className="brand-logo-icon">
+              <Sparkles size={18} />
+            </div>
+            <div className="brand-text-container">
+              <span className="brand-title">AURA</span>
+              <span className="brand-tag">2026</span>
             </div>
           </Link>
 
-          {/* Cart Link with Badge */}
-          <Link to="/checkout" className="nav-action-link nav-cart-btn">
-            <div className="cart-icon-wrapper">
-              <ShoppingCart size={24} />
-              <span className="cart-badge-count">{summary.totalQuantity}</span>
+          {/* Search Bar */}
+          <form className="flagship-search" onSubmit={handleSearchSubmit}>
+            <div className="search-select-box hide-tablet">
+              <select
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                  navigate('/');
+                }}
+                aria-label="Category select"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="nav-text hide-mobile">
-              <span className="nav-text-top">Shopping</span>
-              <span className="nav-text-bottom">Cart</span>
+
+            <div className="search-input-group">
+              <Search size={18} className="search-icon-leading" />
+              <input
+                type="text"
+                placeholder="Search products, brands, categories..."
+                value={localSearch}
+                onChange={(e) => {
+                  setLocalSearch(e.target.value);
+                  setSearchTerm(e.target.value);
+                }}
+                className="flagship-search-input"
+              />
+              {localSearch && (
+                <button
+                  type="button"
+                  className="search-clear-btn"
+                  onClick={handleClearSearch}
+                  aria-label="Clear search"
+                >
+                  <X size={14} />
+                </button>
+              )}
             </div>
-          </Link>
+
+            <button type="submit" className="search-submit-button" aria-label="Submit search">
+              Search
+            </button>
+          </form>
+
+          {/* Nav Right Actions */}
+          <div className="flagship-actions">
+            <Link to="/orders" className="nav-action-btn hide-mobile">
+              <Package size={20} />
+              <span className="nav-action-label">Orders</span>
+            </Link>
+
+            <div className="nav-action-btn hide-mobile" title="Wishlist">
+              <div className="icon-badge-wrapper">
+                <Heart size={20} />
+                {wishlist.length > 0 && <span className="action-badge-dot">{wishlist.length}</span>}
+              </div>
+              <span className="nav-action-label">Saved</span>
+            </div>
+
+            <Link to="/checkout" className="nav-action-btn cart-highlight-btn">
+              <div className="icon-badge-wrapper">
+                <ShoppingBag size={20} />
+                <span className="action-badge-count">{summary.totalQuantity}</span>
+              </div>
+              <span className="nav-action-label hide-mobile">Cart</span>
+            </Link>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Slide-Over Drawer */}
+      <MobileDrawer isOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />
+    </>
   );
 }
