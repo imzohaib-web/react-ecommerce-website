@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useProducts } from '../context/ProductContext';
 import { ProductCard } from '../components/products/ProductCard';
-import { CategoryPills } from '../components/products/CategoryPills';
+import { CategoryCarousel } from '../components/products/CategoryCarousel';
 import { ProductQuickView } from '../components/products/ProductQuickView';
-import { FeaturedCategories } from '../components/home/FeaturedCategories';
 import { FlashDeals } from '../components/home/FlashDeals';
 import { RecentlyViewed } from '../components/home/RecentlyViewed';
 import { Newsletter } from '../components/home/Newsletter';
-import { Sparkles, ShoppingBag, ArrowRight, Zap, ShieldCheck, Truck, Star, Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { Sparkles, ArrowRight, Zap, Truck, Star, Search, ArrowUpDown } from 'lucide-react';
 import './HomePage.css';
 
 export function HomePage() {
@@ -56,7 +55,7 @@ export function HomePage() {
               <button
                 type="button"
                 className="hero-secondary-btn"
-                onClick={() => window.scrollTo({ top: 1200, behavior: 'smooth' })}
+                onClick={() => window.scrollTo({ top: 1250, behavior: 'smooth' })}
               >
                 <Zap size={18} color="#f59e0b" /> Flash Deals
               </button>
@@ -85,8 +84,8 @@ export function HomePage() {
 
       {/* Main Content Body */}
       <div className="flagship-body-container">
-        {/* Featured Categories */}
-        <FeaturedCategories />
+        {/* Horizontal Scrolling Category Carousel */}
+        <CategoryCarousel />
 
         {/* Flash Deals Section */}
         <FlashDeals />
@@ -124,9 +123,6 @@ export function HomePage() {
               </button>
             </div>
           </div>
-
-          {/* Category Filter Pills */}
-          <CategoryPills />
 
           {/* Toolbar Controls */}
           <div className="flagship-toolbar">
