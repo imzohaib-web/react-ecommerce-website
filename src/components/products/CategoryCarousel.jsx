@@ -14,7 +14,7 @@ export function CategoryCarousel() {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [hasMoved, setHasMoved] = useState(false);
 
-  // Category Metadata Mapping with Icons & Representative Images
+  // Category Metadata Mapping
   const categoryMetaData = {
     'All': {
       icon: <LayoutGrid size={22} />,
@@ -42,8 +42,8 @@ export function CategoryCarousel() {
     }
   };
 
-  // Calculate Product Count for each category
-  const categoriesWithCounts = categories.map((catName) => {
+  // Compute Base Categories with Product Counts
+  const baseCategories = categories.map((catName) => {
     let count = productsData.length;
     if (catName !== 'All') {
       count = productsData.filter((p) => p.category === catName).length;
@@ -61,33 +61,52 @@ export function CategoryCarousel() {
     };
   });
 
-  // Auto-Scroll Interval
+  // Duplicate categories 3 times to achieve seamless infinite scrolling
+  const infiniteCategories = [
+    ...baseCategories.map((c, i) => ({ ...c, uniqueId: `set1-${i}-${c.name}` })),
+    ...baseCategories.map((c, i) => ({ ...c, uniqueId: `set2-${i}-${c.name}` })),
+    ...baseCategories.map((c, i) => ({ ...c, uniqueId: `set3-${i}-${c.name}` }))
+  ];
+
+  // Infinite Scroll Boundary Check
+  const handleScrollBoundaries = useCallback(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    const singleSetWidth = el.scrollWidth / 3;
+
+    // Reset scroll if too far left or right to maintain infinite loop seamlessly
+    if (el.scrollLeft <= 10) {
+      el.scrollLeft += singleSetWidth;
+    } else if (el.scrollLeft >= singleSetWidth * 2) {
+      el.scrollLeft -= singleSetWidth;
+    }
+  }, []);
+
+  // Auto-Scroll Timer (Every 3 Seconds)
   useEffect(() => {
     if (isPaused || isDragging) return;
 
     const interval = setInterval(() => {
-      if (!carouselRef.current) return;
       const el = carouselRef.current;
-      const maxScroll = el.scrollWidth - el.clientWidth;
-
-      if (el.scrollLeft >= maxScroll - 10) {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        el.scrollBy({ left: 240, behavior: 'smooth' });
-      }
-    }, 3500);
+      if (!el) return;
+      handleScrollBoundaries();
+      el.scrollBy({ left: 240, behavior: 'smooth' });
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [isPaused, isDragging]);
+  }, [isPaused, isDragging, handleScrollBoundaries]);
 
   // Scroll Left / Right Buttons
   const scroll = (direction) => {
-    if (!carouselRef.current) return;
+    const el = carouselRef.current;
+    if (!el) return;
+    handleScrollBoundaries();
     const offset = direction === 'left' ? -280 : 280;
-    carouselRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    el.scrollBy({ left: offset, behavior: 'smooth' });
   };
 
-  // Mouse Drag Events
+  // Mouse Drag Handlers
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setHasMoved(false);
@@ -102,13 +121,14 @@ export function CategoryCarousel() {
     const walk = (x - startX) * 1.5;
     if (Math.abs(walk) > 5) setHasMoved(true);
     carouselRef.current.scrollLeft = scrollLeft - walk;
+    handleScrollBoundaries();
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
   };
 
-  // Touch Swipe Events
+  // Touch Swipe Handlers
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setHasMoved(false);
@@ -122,6 +142,7 @@ export function CategoryCarousel() {
     const walk = (x - startX) * 1.5;
     if (Math.abs(walk) > 5) setHasMoved(true);
     carouselRef.current.scrollLeft = scrollLeft - walk;
+    handleScrollBoundaries();
   };
 
   const handleTouchEnd = () => {
@@ -129,7 +150,7 @@ export function CategoryCarousel() {
   };
 
   const handleSelectCategory = (catName) => {
-    if (hasMoved) return; // Prevent selection during drag
+    if (hasMoved) return; // Ignore drag clicks
     setSelectedCategory(catName);
     setSearchTerm('');
   };
@@ -178,6 +199,7 @@ export function CategoryCarousel() {
         <div
           ref={carouselRef}
           className={`carousel-track ${isDragging ? 'dragging' : ''}`}
+          onScroll={handleScrollBoundaries}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -185,12 +207,12 @@ export function CategoryCarousel() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {categoriesWithCounts.map((cat) => {
+          {infiniteCategories.map((cat) => {
             const isActive = selectedCategory === cat.name;
 
             return (
               <div
-                key={cat.name}
+                key={cat.uniqueId}
                 className={`category-carousel-card ${isActive ? 'active' : ''}`}
                 onClick={() => handleSelectCategory(cat.name)}
               >
