@@ -126,20 +126,6 @@ export const productsData = [
     description: "Silky soft 2-ply facial tissues formulated to be gentle on sensitive skin. Includes 8 family-size boxes."
   },
   {
-    id: "5968897c-4d27-4872-89f6-5bcb052746d7",
-    image: "images/products/women-striped-beach-dress.jpg",
-    name: "Women's Striped Beach Dress",
-    rating: {
-      stars: 4.5,
-      count: 235
-    },
-    priceCents: 2970,
-    category: "Clothing & Apparel",
-    keywords: ["dress", "beach", "summer", "apparel"],
-    inStock: true,
-    description: "Lightweight striped cover-up dress made from quick-dry linen blend fabric with elastic waist."
-  },
-  {
     id: "b86ddc8b-3501-4b17-9889-a3bad6fb585f",
     image: "images/products/women-sandal-heels-white-pink.jpg",
     name: "Women's Sandal Heels - Pink",

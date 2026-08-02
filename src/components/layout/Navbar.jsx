@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingBag, Package, Heart, Menu, X, Sparkles } from 'lucide-react';
+import { Search, ShoppingBag, Package, Heart, Menu, X } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
 import { MobileDrawer } from './MobileDrawer';
+import { BrandLogo } from '../common/BrandLogo';
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800 shadow-lg transition-all duration-300">
+      <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md text-white border-b border-slate-800/80 shadow-xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           {/* Mobile Hamburger Trigger */}
           <button
@@ -38,19 +39,7 @@ export function Navbar() {
           </button>
 
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-400/20 group-hover:scale-105 transition-transform duration-300">
-              <Sparkles size={18} />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-lg tracking-tight text-white group-hover:text-amber-400 transition-colors">
-                AURA
-              </span>
-              <span className="text-[10px] font-semibold tracking-widest text-amber-400 -mt-1 uppercase">
-                PRO 2026
-              </span>
-            </div>
-          </Link>
+          <BrandLogo variant="dark" />
 
           {/* Search Bar */}
           <form className="flex-1 max-w-2xl hidden md:flex items-center" onSubmit={handleSearchSubmit}>

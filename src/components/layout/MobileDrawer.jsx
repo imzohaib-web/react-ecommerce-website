@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { X, Package, ShoppingBag, Heart, Home, Tag, Sparkles } from 'lucide-react';
+import { X, Package, ShoppingBag, Heart, Home, Tag } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
+import { BrandLogo } from '../common/BrandLogo';
 
 export function MobileDrawer({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -16,15 +17,7 @@ export function MobileDrawer({ isOpen, onClose }) {
       <div className="relative z-10 w-4/5 max-w-sm h-full bg-slate-900 text-white shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
         {/* Drawer Header */}
         <div className="p-5 border-b border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center font-bold">
-              <Sparkles size={16} />
-            </div>
-            <span className="font-extrabold text-lg text-white">AURA</span>
-            <span className="text-[10px] bg-amber-400/20 text-amber-400 font-bold px-2 py-0.5 rounded-full border border-amber-400/30">
-              2026
-            </span>
-          </div>
+          <BrandLogo variant="dark" size="small" />
           <button
             type="button"
             className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"

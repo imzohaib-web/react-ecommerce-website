@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Trash2, ShieldCheck, ShoppingBag, ArrowLeft, Sparkles, Truck } from 'lucide-react';
+import { Lock, Trash2, ShieldCheck, ShoppingBag, ArrowLeft, Truck } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useOrders } from '../../context/OrdersContext';
 import { formatMoney } from '../../utils/money';
 import { getEstimatedDeliveryDate } from '../../utils/dateUtils';
+import { BrandLogo } from '../../components/common/BrandLogo';
 
 export function CheckoutPage() {
   const navigate = useNavigate();
@@ -31,15 +32,7 @@ export function CheckoutPage() {
       {/* Checkout Header */}
       <header className="sticky top-0 z-40 bg-slate-900 text-white border-b border-slate-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold">
-              <Sparkles size={18} />
-            </div>
-            <span className="font-extrabold text-xl text-white">AURA</span>
-            <span className="text-[10px] bg-amber-400/20 text-amber-400 font-bold px-2 py-0.5 rounded-full border border-amber-400/30">
-              2026
-            </span>
-          </Link>
+          <BrandLogo variant="dark" size="small" />
 
           <div className="text-sm font-semibold text-slate-300">
             Checkout (

@@ -299,7 +299,7 @@ export function CartDrawer() {
                     <Tag size={15} className="text-slate-400 mr-2 flex-shrink-0" />
                     <input
                       type="text"
-                      placeholder="Promo code (e.g. AURA20)"
+                      placeholder="Promo code (e.g. SWIFT20)"
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       className="w-full bg-transparent text-xs text-slate-900 font-bold uppercase outline-none py-1"
@@ -313,7 +313,7 @@ export function CartDrawer() {
                   </div>
                   {couponError && <div className="text-[11px] text-rose-500 font-semibold">{couponError}</div>}
                   <div className="text-[11px] text-slate-400">
-                    Try <button type="button" onClick={() => setCouponCode('AURA20')} className="text-amber-600 font-bold underline">AURA20</button> or <button type="button" onClick={() => setCouponCode('SAVE10')} className="text-amber-600 font-bold underline">SAVE10</button>
+                    Try <button type="button" onClick={() => setCouponCode('SWIFT20')} className="text-amber-600 font-bold underline">SWIFT20</button> or <button type="button" onClick={() => setCouponCode('SAVE10')} className="text-amber-600 font-bold underline">SAVE10</button>
                   </div>
                 </form>
               )}

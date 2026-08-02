@@ -1,12 +1,33 @@
-# React + Vite
+# SwiftCart — Next-Gen Modern Ecommerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SwiftCart is a modern, high-performance, responsive React + Tailwind CSS ecommerce web application designed for a premium shopping experience across desktop, tablet, and mobile devices.
 
-Currently, two official plugins are available:
+![SwiftCart](/public/favicon.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+- **Automated Hero Banner Slider**: Crossfading slideshow with Ken Burns background zoom, Framer Motion text animations, pagination dots, and hover-to-pause auto-play.
+- **24-Hour Flash Deals**: Real-time countdown timer, claimed percentage progress bars, stock status badges, wishlist heart toggles, and responsive card layouts.
+- **Dynamic Product Catalog**: Multi-category filtering, keyword search, quick-view modal, custom sorting (price/rating), and real-time inventory tracking.
+- **Interactive Shopping Cart**: Slide-out drawer cart with instant promo code application (`SWIFT20`, `SAVE10`), quantity adjustment, and item recovery (undo remove).
+- **Modern Responsive UI**: Built with Tailwind CSS v4, Framer Motion, Lucide React icons, and custom Google Fonts (`Outfit` & `Plus Jakarta Sans`).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- **Frontend**: React 19, React Router v7, Tailwind CSS v4, Framer Motion
+- **Icons & Design**: Lucide React, Google Fonts (Outfit / Plus Jakarta Sans)
+- **Build Tool**: Vite
+- **State Management**: React Context API & React Hooks
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run dev server
+npm run dev
+
+# Production build
+npm run build
+```

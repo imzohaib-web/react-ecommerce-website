@@ -26,7 +26,7 @@ const defaultSeedCart = [
 
 // Valid Coupons Configuration
 export const VALID_COUPONS = {
-  'AURA20': { code: 'AURA20', type: 'percent', value: 20, label: '20% OFF Everything' },
+  'SWIFT20': { code: 'SWIFT20', type: 'percent', value: 20, label: '20% OFF Everything' },
   'SAVE10': { code: 'SAVE10', type: 'fixed', value: 1000, label: '$10 OFF Order' },
   'WELCOME15': { code: 'WELCOME15', type: 'percent', value: 15, label: '15% New Customer Discount' }
 };
@@ -214,7 +214,7 @@ export function CartProvider({ children }) {
       addToast(`Coupon "${coupon.code}" applied successfully!`, 'success');
       return { success: true, message: `Applied ${coupon.label}` };
     } else {
-      addToast(`Invalid promo code. Try "AURA20" or "SAVE10"`, 'error');
+      addToast(`Invalid promo code. Try "SWIFT20" or "SAVE10"`, 'error');
       return { success: false, message: 'Invalid promo code.' };
     }
   }, [addToast]);

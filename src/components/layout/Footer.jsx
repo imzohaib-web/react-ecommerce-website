@@ -1,5 +1,6 @@
-import { Sparkles, ShieldCheck, Truck, RotateCcw, ArrowUp, Globe, Share2, Heart } from 'lucide-react';
+import { ShieldCheck, Truck, RotateCcw, ArrowUp, Globe, Share2, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { BrandLogo } from '../common/BrandLogo';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -7,11 +8,11 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800 font-sans">
+    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800/80 font-sans">
       {/* Back to top banner */}
       <button
         type="button"
-        className="w-full bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-amber-400 py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border-b border-slate-800 transition-colors cursor-pointer"
+        className="w-full bg-slate-900/90 hover:bg-slate-850 text-slate-400 hover:text-amber-400 py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border-b border-slate-800 transition-colors cursor-pointer"
         onClick={scrollToTop}
       >
         <ArrowUp size={14} /> Back to top
@@ -22,14 +23,9 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Col 1: Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold">
-                <Sparkles size={18} />
-              </div>
-              <span className="font-extrabold text-xl tracking-tight text-white">AURA</span>
-            </div>
+            <BrandLogo variant="dark" size="normal" />
             <p className="text-sm text-slate-400 leading-relaxed">
-              The next-generation ecommerce platform crafted for seamless shopping, instant fulfillment, and premium product discovery.
+              SwiftCart is a next-generation online store platform engineered for speed, premium product discovery, and instant express delivery.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <span className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-amber-400 hover:border-amber-400/50 flex items-center justify-center transition-all cursor-pointer" title="Global Store">
@@ -99,7 +95,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
-        <p>© {new Date().getFullYear()} AURA Ecommerce. Designed for modern web standard 2026.</p>
+        <p>© {new Date().getFullYear()} SwiftCart Inc. Modern Ecommerce Startup 2026.</p>
       </div>
     </footer>
   );
