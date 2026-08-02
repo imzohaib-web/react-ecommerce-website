@@ -6,7 +6,8 @@ import { ProductQuickView } from '../components/products/ProductQuickView';
 import { FlashDeals } from '../components/home/FlashDeals';
 import { RecentlyViewed } from '../components/home/RecentlyViewed';
 import { Newsletter } from '../components/home/Newsletter';
-import { Sparkles, ArrowRight, Zap, Truck, Star, Search, ArrowUpDown } from 'lucide-react';
+import { HeroSection } from '../components/home/HeroSection';
+import { Search, ArrowUpDown } from 'lucide-react';
 
 export function HomePage() {
   const {
@@ -29,63 +30,7 @@ export function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50 font-sans pb-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white py-16 sm:py-24 relative overflow-hidden">
-        {/* Background Decorative Glow */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-              <Sparkles size={14} className="text-amber-400 animate-pulse" /> NEXT-GEN ECOMMERCE 2026
-            </div>
-
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Discover Products Built for{' '}
-              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-                Modern Living
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Curated tech, apparel, and lifestyle essentials. Enjoy fast express delivery, 30-day hassle-free returns, and premium customer care.
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-2">
-              <button
-                type="button"
-                className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-amber-400/20 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all cursor-pointer text-sm"
-                onClick={() => window.scrollTo({ top: 700, behavior: 'smooth' })}
-              >
-                Shop Collection <ArrowRight size={18} />
-              </button>
-              <button
-                type="button"
-                className="bg-slate-800/90 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl border border-slate-700 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all cursor-pointer text-sm"
-                onClick={() => window.scrollTo({ top: 1200, behavior: 'smooth' })}
-              >
-                <Zap size={18} className="text-amber-400" /> Flash Deals
-              </button>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-800/80 text-xs text-slate-400">
-              <div className="flex items-center gap-2">
-                <div className="flex text-amber-400">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={14} fill="#f59e0b" color="#f59e0b" />
-                  ))}
-                </div>
-                <span>4.9/5 from 50k+ Happy Customers</span>
-              </div>
-              <div className="w-1 h-1 bg-slate-700 rounded-full hidden sm:block" />
-              <div className="flex items-center gap-2">
-                <Truck size={16} className="text-amber-400" />
-                <span>Free Express Shipping On $25+</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Main Content Body */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
