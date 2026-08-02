@@ -1,39 +1,34 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Search, ShoppingBag } from 'lucide-react';
 import { NotificationDropdown } from '../features/notifications/NotificationDropdown';
-import './header.css';
+
 export function Header() {
-    return (
-        <div className="header">
-            <div className="left-section">
-                <Link to="/" className="header-link">
-                    <img className="logo"
-                        src="images/logo-white.png" />
-                    <img className="mobile-logo"
-                        src="images/mobile-logo-white.png" />
-                </Link>
-            </div>
+  return (
+    <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between gap-4">
+      <Link to="/" className="flex items-center gap-2 font-bold text-lg text-amber-400">
+        AURA
+      </Link>
 
-            <div className="middle-section">
-                <input className="search-bar" type="text" placeholder="Search" />
+      <div className="flex-1 max-w-md flex items-center bg-slate-800 rounded-xl px-3 py-1.5">
+        <input
+          className="w-full bg-transparent text-sm text-white placeholder-slate-400 outline-none"
+          type="text"
+          placeholder="Search..."
+        />
+        <button type="button" className="text-slate-400 hover:text-white">
+          <Search size={16} />
+        </button>
+      </div>
 
-                <button className="search-button">
-                    <img className="search-icon" src="images/icons/search-icon.png" />
-                </button>
-            </div>
-
-            <div className="right-section">
-                <NotificationDropdown />
-                <Link className="orders-link header-link" to="/orders">
-
-                    <span className="orders-text">Orders</span>
-                </Link>
-
-                <Link className="cart-link header-link" to="/checkout">
-                    <img className="cart-icon" src="images/icons/cart-icon.png" />
-                    <div className="cart-quantity">3</div>
-                    <div className="cart-text">Cart</div>
-                </Link>
-            </div>
-        </div>
-    )
+      <div className="flex items-center gap-4">
+        <NotificationDropdown />
+        <Link to="/orders" className="text-sm font-semibold text-slate-300 hover:text-white">
+          Orders
+        </Link>
+        <Link to="/checkout" className="flex items-center gap-1 text-sm font-semibold text-amber-400">
+          <ShoppingBag size={18} /> Cart
+        </Link>
+      </div>
+    </div>
+  );
 }

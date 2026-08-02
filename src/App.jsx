@@ -17,6 +17,8 @@ const TrackingPage = lazy(() => import('./pages/TrackingPage').then((m) => ({ de
 const NotificationsPage = lazy(() => import('./pages/NotificationsPage').then((m) => ({ default: m.NotificationsPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
+import { CartDrawer } from './components/cart/CartDrawer';
+
 function AppContent() {
   const location = useLocation();
   const isCheckout = location.pathname === '/checkout';
@@ -37,6 +39,7 @@ function AppContent() {
       </Suspense>
 
       {!isCheckout && <Footer />}
+      <CartDrawer />
       <ToastContainer />
     </div>
   );

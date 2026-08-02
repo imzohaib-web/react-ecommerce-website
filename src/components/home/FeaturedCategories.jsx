@@ -1,6 +1,5 @@
 import { Shirt, Flame, Dumbbell, Footprints, Sparkles, Home } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
-import './FeaturedCategories.css';
 
 export function FeaturedCategories() {
   const { setSelectedCategory, setSearchTerm } = useProducts();
@@ -8,37 +7,32 @@ export function FeaturedCategories() {
   const categoryItems = [
     {
       name: "Clothing & Apparel",
-      icon: <Shirt size={28} />,
+      icon: <Shirt size={24} />,
       count: "12+ Items",
-      gradient: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
       badge: "Trending"
     },
     {
       name: "Home & Kitchen",
-      icon: <Home size={28} />,
+      icon: <Home size={24} />,
       count: "18+ Items",
-      gradient: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
       badge: "Popular"
     },
     {
       name: "Sports & Outdoors",
-      icon: <Dumbbell size={28} />,
+      icon: <Dumbbell size={24} />,
       count: "8+ Items",
-      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
       badge: "Best Seller"
     },
     {
       name: "Shoes & Footwear",
-      icon: <Footprints size={28} />,
+      icon: <Footprints size={24} />,
       count: "10+ Items",
-      gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
       badge: "New"
     },
     {
       name: "Fashion Accessories",
-      icon: <Sparkles size={28} />,
+      icon: <Sparkles size={24} />,
       count: "6+ Items",
-      gradient: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
       badge: "Featured"
     }
   ];
@@ -50,29 +44,30 @@ export function FeaturedCategories() {
   };
 
   return (
-    <section className="featured-categories-section">
-      <div className="section-header-row">
+    <section className="mb-12">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <span className="section-tag-pill"><Flame size={14} /> Top Collections</span>
-          <h2 className="section-main-title">Explore Featured Categories</h2>
+          <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 border border-amber-300 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full mb-1">
+            <Flame size={13} /> Top Collections
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Explore Featured Categories</h2>
         </div>
       </div>
 
-      <div className="categories-cards-grid">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {categoryItems.map((cat) => (
           <div
             key={cat.name}
-            className="featured-cat-card"
+            className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center cursor-pointer group"
             onClick={() => handleCategorySelect(cat.name)}
           >
-            <div className="cat-card-gradient" style={{ background: cat.gradient }}>
-              <span className="cat-badge">{cat.badge}</span>
-              <div className="cat-icon-box">{cat.icon}</div>
+            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center mb-3 group-hover:bg-amber-400 group-hover:scale-110 transition-all">
+              {cat.icon}
             </div>
-            <div className="cat-card-info">
-              <h3 className="cat-title">{cat.name}</h3>
-              <span className="cat-count">{cat.count}</span>
-            </div>
+            <h3 className="font-bold text-xs sm:text-sm text-slate-900 line-clamp-1 mb-1 group-hover:text-amber-500 transition-colors">
+              {cat.name}
+            </h3>
+            <span className="text-[11px] font-semibold text-slate-400">{cat.count}</span>
           </div>
         ))}
       </div>

@@ -1,6 +1,4 @@
 import { Bell, CheckCircle2, Package, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import './NotificationsPage.css';
 
 export function NotificationsPage() {
   const notifications = [
@@ -28,26 +26,26 @@ export function NotificationsPage() {
   ];
 
   return (
-    <div className="notifications-page-container">
-      <main className="notifications-content">
-        <h1 className="notifications-page-title">
-          <Bell size={28} /> Notifications
+    <div className="min-h-screen bg-slate-50 font-sans pb-16 pt-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
+          <Bell size={32} className="text-amber-500" /> Notifications
         </h1>
 
-        <div className="notifications-card">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-md divide-y divide-slate-100 overflow-hidden">
           {notifications.map((n) => (
-            <div key={n.id} className="notification-item-row">
-              <div className="notification-icon-wrapper">
-                {n.type === 'shipping' && <Package size={20} className="shipping-icon" />}
-                {n.type === 'promo' && <Sparkles size={20} className="promo-icon" />}
-                {n.type === 'system' && <CheckCircle2 size={20} className="system-icon" />}
+            <div key={n.id} className="p-6 flex items-start gap-4 hover:bg-slate-50 transition-colors">
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 bg-slate-100">
+                {n.type === 'shipping' && <Package size={20} className="text-sky-500" />}
+                {n.type === 'promo' && <Sparkles size={20} className="text-amber-500" />}
+                {n.type === 'system' && <CheckCircle2 size={20} className="text-emerald-500" />}
               </div>
-              <div className="notification-text-content">
-                <div className="notification-item-header">
-                  <h3 className="notification-item-title">{n.title}</h3>
-                  <span className="notification-item-time">{n.time}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <h3 className="font-bold text-sm text-slate-900">{n.title}</h3>
+                  <span className="text-xs text-slate-400 font-medium">{n.time}</span>
                 </div>
-                <p className="notification-item-msg">{n.message}</p>
+                <p className="text-xs text-slate-600 leading-relaxed">{n.message}</p>
               </div>
             </div>
           ))}

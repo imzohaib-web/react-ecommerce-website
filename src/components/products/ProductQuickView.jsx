@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { X, ShoppingCart, Check, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { X, ShoppingBag, Check, ShieldCheck, Truck, RotateCcw, Star } from 'lucide-react';
 import { formatMoney } from '../../utils/money';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
-import './ProductQuickView.css';
 
 export function ProductQuickView() {
   const { quickViewProduct, setQuickViewProduct } = useProducts();
@@ -21,85 +20,95 @@ export function ProductQuickView() {
     }, 2000);
   };
 
-  const ratingStars = Math.round(quickViewProduct.rating.stars * 10);
-  const ratingImagePath = `images/ratings/rating-${ratingStars}.png`;
-
   return (
     <div
-      className="quick-view-overlay"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={() => setQuickViewProduct(null)}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="quick-view-modal"
+        className="relative z-10 w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
-          className="quick-view-close-btn"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors cursor-pointer"
           onClick={() => setQuickViewProduct(null)}
           aria-label="Close dialog"
         >
           <X size={20} />
         </button>
 
-        <div className="quick-view-grid">
-          {/* Left Column: Image */}
-          <div className="quick-view-image-container">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left Column: Image Stage */}
+          <div className="bg-slate-50 p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-slate-100">
             <img
               src={quickViewProduct.image}
               alt={quickViewProduct.name}
-              className="quick-view-image"
+              className="max-h-72 object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
 
           {/* Right Column: Info */}
-          <div className="quick-view-info">
-            <span className="quick-view-category">{quickViewProduct.category || 'General'}</span>
-
-            <h2 className="quick-view-title">{quickViewProduct.name}</h2>
-
-            <div className="quick-view-rating">
-              <img
-                src={ratingImagePath}
-                alt={`${quickViewProduct.rating.stars} stars`}
-                className="rating-stars-img"
-              />
-              <span className="rating-count-text">
-                {quickViewProduct.rating.stars} ({quickViewProduct.rating.count} customer ratings)
+          <div className="p-6 sm:p-8 flex flex-col justify-between">
+            <div className="space-y-3">
+              <span className="inline-block bg-amber-100 text-amber-900 font-extrabold text-[11px] uppercase tracking-wider px-3 py-1 rounded-full border border-amber-300">
+                {quickViewProduct.category || 'General'}
               </span>
+
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 leading-tight">
+                {quickViewProduct.name}
+              </h2>
+
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg text-xs font-bold text-amber-900">
+                  <Star size={14} fill="#f59e0b" color="#f59e0b" />
+                  <span>{quickViewProduct.rating.stars}</span>
+                </div>
+                <span className="text-xs text-slate-500 font-medium">
+                  ({quickViewProduct.rating.count} customer reviews)
+                </span>
+              </div>
+
+              <div className="flex items-baseline gap-3 pt-1">
+                <span className="text-2xl sm:text-3xl font-extrabold text-slate-950">
+                  ${formatMoney(quickViewProduct.priceCents)}
+                </span>
+                <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  In Stock
+                </span>
+              </div>
+
+              <p className="text-sm text-slate-600 leading-relaxed pt-1">
+                {quickViewProduct.description ||
+                  'High-quality product designed for maximum performance, longevity, and overall customer satisfaction.'}
+              </p>
+
+              <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-600">
+                <div className="flex items-center gap-2">
+                  <Truck size={16} className="text-amber-500" />
+                  <span>Free Express Shipping Available</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-emerald-500" />
+                  <span>Authentic Quality Guaranteed</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RotateCcw size={16} className="text-sky-500" />
+                  <span>30-Day Hassle-Free Return Policy</span>
+                </div>
+              </div>
             </div>
 
-            <div className="quick-view-price">
-              ${formatMoney(quickViewProduct.priceCents)}
-              <span className="in-stock-badge">In Stock</span>
-            </div>
-
-            <p className="quick-view-description">
-              {quickViewProduct.description ||
-                'High-quality product designed for maximum performance, longevity, and overall customer satisfaction.'}
-            </p>
-
-            <div className="quick-view-guarantees">
-              <div className="guarantee-item">
-                <Truck size={16} /> Free Shipping Available
-              </div>
-              <div className="guarantee-item">
-                <ShieldCheck size={16} /> Authentic Quality Guaranteed
-              </div>
-              <div className="guarantee-item">
-                <RotateCcw size={16} /> 30-Day Free Return Policy
-              </div>
-            </div>
-
-            <div className="quick-view-actions">
-              <div className="quick-view-qty">
-                <label htmlFor="modal-qty">Quantity:</label>
+            <div className="flex items-center gap-3 pt-6 border-t border-slate-100 mt-6">
+              <div className="flex items-center gap-2">
+                <label htmlFor="modal-qty" className="text-xs font-bold text-slate-700">Qty:</label>
                 <select
                   id="modal-qty"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
                 >
                   {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
                     <option key={n} value={n}>
@@ -111,7 +120,11 @@ export function ProductQuickView() {
 
               <button
                 type="button"
-                className={`quick-view-add-btn ${isAdded ? 'added' : ''}`}
+                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-extrabold transition-all cursor-pointer shadow-md ${
+                  isAdded
+                    ? 'bg-emerald-500 text-white shadow-emerald-500/20'
+                    : 'bg-amber-400 hover:bg-amber-500 text-slate-950 shadow-amber-400/20 hover:scale-[1.02]'
+                }`}
                 onClick={handleAddToCart}
               >
                 {isAdded ? (
@@ -120,7 +133,7 @@ export function ProductQuickView() {
                   </>
                 ) : (
                   <>
-                    <ShoppingCart size={18} /> Add to Cart
+                    <ShoppingBag size={18} /> Add to Cart
                   </>
                 )}
               </button>
