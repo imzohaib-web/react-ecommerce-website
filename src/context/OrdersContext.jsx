@@ -1,62 +1,29 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { productsData } from '../data/productsData';
 import { getEstimatedDeliveryMs } from '../utils/dateUtils';
 import { useToast } from './ToastContext';
 
 const OrdersContext = createContext(null);
 
-const STORAGE_KEY = 'amazon_orders_v2';
-
-const defaultSeedOrders = [
-  {
-    id: "27cba69d-4c3d-4098-b42d-ac7fa62b7664",
-    orderTimeMs: Date.now() - 1000 * 60 * 60 * 24 * 3, // 3 days ago
-    totalCostCents: 3506,
-    products: [
-      {
-        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity: 1,
-        estimatedDeliveryTimeMs: Date.now() + 1000 * 60 * 60 * 24 * 2, // 2 days in future
-        product: productsData.find((p) => p.id === "e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
-      },
-      {
-        productId: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
-        quantity: 2,
-        estimatedDeliveryTimeMs: Date.now() + 1000 * 60 * 60 * 24 * 4,
-        product: productsData.find((p) => p.id === "83d4ca15-0f35-48f5-b7a3-1ea210004f2e")
-      }
-    ]
-  },
-  {
-    id: "b6b6c212-d30e-4d4a-805d-90b52ce6b37d",
-    orderTimeMs: Date.now() - 1000 * 60 * 60 * 24 * 14, // 14 days ago
-    totalCostCents: 4190,
-    products: [
-      {
-        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-        quantity: 2,
-        estimatedDeliveryTimeMs: Date.now() - 1000 * 60 * 60 * 24 * 7, // delivered 7 days ago
-        product: productsData.find((p) => p.id === "15b6fc6f-327a-4ec4-896f-486349e85a3d")
-      }
-    ]
-  }
-];
+const STORAGE_KEY = 'swiftcart_orders_v1';
 
 export function OrdersProvider({ children }) {
   const { addToast } = useToast();
+
+  // Load actual user purchases from LocalStorage. Starts empty [] if no purchases exist.
   const [orders, setOrders] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed)) return parsed;
       }
     } catch (err) {
       console.error('Failed to load orders from localStorage:', err);
     }
-    return defaultSeedOrders;
+    return [];
   });
 
+  // Persist user orders to LocalStorage
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
@@ -77,7 +44,7 @@ export function OrdersProvider({ children }) {
     const orderProducts = cart.map((item) => ({
       productId: item.productId,
       quantity: item.quantity,
-      estimatedDeliveryTimeMs: getEstimatedDeliveryMs(item.deliveryOption.deliveryDays),
+      estimatedDeliveryTimeMs: getEstimatedDeliveryMs(item.deliveryOption?.deliveryDays || 3),
       product: item.product
     }));
 

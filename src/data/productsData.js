@@ -572,6 +572,104 @@ export const productsData = [
     keywords: ["kitchen", "kitchen towels", "tissues"],
     inStock: true,
     description: "Absorbent select-a-size paper towel rolls engineered for fast spill pickup and tough wiping jobs."
+  },
+  {
+    id: "sports-pro-basketball-001",
+    image: "images/products/intermediate-composite-basketball.jpg",
+    name: "Pro Composite Grip Indoor/Outdoor Basketball",
+    rating: {
+      stars: 4.8,
+      count: 215
+    },
+    priceCents: 2999,
+    category: "Sports & Outdoors",
+    keywords: ["basketball", "sports", "fitness", "outdoor", "games", "ball"],
+    inStock: true,
+    description: "Official size 7 composite leather basketball engineered with deep channel grip for indoor gym courts and outdoor play."
+  },
+  {
+    id: "sports-flex-sneakers-002",
+    image: "images/products/knit-athletic-sneakers-gray.jpg",
+    name: "Pro-Flex Cushioning Marathon Running Sneakers",
+    rating: {
+      stars: 4.9,
+      count: 438
+    },
+    priceCents: 6499,
+    category: "Sports & Outdoors",
+    keywords: ["running shoes", "sneakers", "sports", "footwear", "fitness", "jogging"],
+    inStock: true,
+    description: "Ultra-lightweight breathable knit mesh running shoes featuring high-rebound shock absorbing soles for long distance comfort."
+  },
+  {
+    id: "sports-socks-pack-003",
+    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
+    name: "Anti-Blister Performance Compression Athletic Socks - 6 Pack",
+    rating: {
+      stars: 4.7,
+      count: 189
+    },
+    priceCents: 1499,
+    category: "Sports & Outdoors",
+    keywords: ["socks", "sports", "compression", "fitness", "apparel", "workout"],
+    inStock: true,
+    description: "Moisture-wicking athletic crew socks reinforced with arch support and heel padding for intense gym workouts and running."
+  },
+  {
+    id: "sports-trainer-shoes-004",
+    image: "images/products/men-athletic-shoes-white.jpg",
+    name: "Pro Cross-Trainer Athletic Shoes - White",
+    rating: {
+      stars: 4.6,
+      count: 312
+    },
+    priceCents: 5999,
+    category: "Sports & Outdoors",
+    keywords: ["trainer", "shoes", "crossfit", "sports", "fitness", "gym"],
+    inStock: true,
+    description: "Durable cross-training footwear with lateral support and anti-slip rubber outsoles ideal for HIIT and weightlifting."
+  },
+  {
+    id: "sports-skate-sneakers-005",
+    image: "images/products/athletic-skateboard-shoes-gray.jpg",
+    name: "Urban Street Skateboarding & Athletic Sneakers",
+    rating: {
+      stars: 4.5,
+      count: 154
+    },
+    priceCents: 4999,
+    category: "Sports & Outdoors",
+    keywords: ["skate shoes", "sneakers", "sports", "streetwear", "skateboarding"],
+    inStock: true,
+    description: "Reinforced suede and canvas skateboard shoes with vulcanized rubber grip for maximum board control and street style."
+  },
+  {
+    id: "sports-golf-umbrella-006",
+    image: "images/products/umbrella.jpg",
+    name: "Heavy-Duty Windproof Golf & Outdoor Sports Umbrella",
+    rating: {
+      stars: 4.8,
+      count: 98
+    },
+    priceCents: 2499,
+    category: "Sports & Outdoors",
+    keywords: ["umbrella", "golf", "sports", "outdoor", "rain gear", "windproof"],
+    inStock: true,
+    description: "Double-canopy 62-inch extra large sports umbrella built with a heavy-duty fiberglass frame that withstands high winds."
+  },
+  {
+    id: "sports-gym-backpack-007",
+    image: "images/products/backpack.jpg",
+    name: "Water-Resistant Outdoor Sports & Hiking Gym Backpack",
+    rating: {
+      stars: 4.9,
+      count: 520
+    },
+    priceCents: 3499,
+    category: "Sports & Outdoors",
+    keywords: ["backpack", "gym bag", "hiking", "sports", "fitness", "outdoor"],
+    inStock: true,
+    description: "Ergonomic multi-compartment sports backpack with ventilated shoe pocket, laptop sleeve, and water bottle holders."
   }
 ];
 
